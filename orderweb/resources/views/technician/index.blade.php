@@ -1,10 +1,10 @@
 @extends('templates.base')
-@section('title','listado causales')
-@section('header','listado causales')
+@section('title','listado de tecnicos')
+@section('header','listado de tecnicos')
 @section('content')
     <div class="row">
             <div class=" col-lg-12 mb-4 d-grip gap-2 d-mb-block">
-                <a href="{{ route('causal.create') }}" class="btn btn primary">crear</a>
+                <a href="{{ route('technitian.create') }}" class="btn btn primary">crear</a>
             </div>
         </div>
 
@@ -17,13 +17,19 @@
                     <tr>
                         <th>id</th>
                         <th>Descripcion</th>
+                        <th>horas</th>
+                        <th>tecnico</th>
+                        <th>tipo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>causal de prueba</td>
+                        <td>1117013786 </td>
+                        <td>Arnulfo Archundia</td>
+                        <td>121212343</td>
+                        <td>REPARACION DE MAQUINAS</td>
                         <td>
                             <a href="#" title="editar" 
                             class="btn btn-info-circle btn-sm">

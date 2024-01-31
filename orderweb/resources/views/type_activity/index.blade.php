@@ -1,10 +1,10 @@
 @extends('templates.base')
-@section('title','listado causales')
-@section('header','listado causales')
+@section('title','listado tipos de actividades')
+@section('header','listado tipos de actividades')
 @section('content')
     <div class="row">
             <div class=" col-lg-12 mb-4 d-grip gap-2 d-mb-block">
-                <a href="{{ route('causal.create') }}" class="btn btn primary">crear</a>
+                <a href="{{ route('type_activity.create') }}" class="btn btn primary">crear</a>
             </div>
         </div>
 
