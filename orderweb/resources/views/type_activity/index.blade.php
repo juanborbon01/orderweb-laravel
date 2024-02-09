@@ -21,15 +21,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($typeactivitys as $typeactivity)
                     <tr>
-                        <td>1</td>
-                        <td>causal de prueba</td>
+                        <td>{{ $typeactivity['id'] }}</td>
+                        <td>{{ $typeactivity['description'] }} </td>
                         <td>
-                            <a href="#" title="editar" 
+                            <a href="{{ route('type_activity.edit',$typeactivity['id']) }}" title="editar" 
                             class="btn btn-info-circle btn-sm">
                             <i class="far-fa-edit"></i>
                         </a>
-                        <a href="#" title="eliminar" 
+                        <a href="{{ route('type_activity.destroy',$typeactivity['id']) }}" title="eliminar" 
                             class="btn btn-danger btn-circle btn-sm"
                             onclick = "return remove()">
                         <i class="fas-fa-trash"></i>
