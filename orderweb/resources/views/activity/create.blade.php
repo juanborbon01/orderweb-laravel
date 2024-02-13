@@ -6,7 +6,7 @@
     @include('templates.messages')
     <div class="row"> 
         <div class="col-lg-12 mb-4">
-                <form action="#" method="POST">
+                <form action="{{ route('activity.store') }}" method="POST">
                     @csrf
 
                         <div class="row form-group">
@@ -28,14 +28,22 @@
                                 <select name="technician_id" id="technician_id"
                                 class="form-control" required>
                                 <option value="">seleccione</option>
+                                @foreach ($technicians as $technician)
+                                    <option value="{{ $technician['document'] }}">
+                                        {{  $technician['name'] }}</option>
                                 </select>
                             </div>
                         <div class="row form-group">
                             <div class="col-lj-6 mb-4">
-                                <label for="technician_id">tecnico</label>
-                                <select name="technician_id" id="technician_id"
+                                <label for="technician_id">tipo</label>
+                                <select name="type_id" id="type_id"
                                 class="form-control" required>
                                 <option value="">seleccione</option>
+                                @foreach ($types as $type)
+                                    <option value="{{ $type['id'] }}">
+                                    {{ $type['description'] }}
+                                </option>
+                                @endforeach
                                 </select>
                             </div>
     

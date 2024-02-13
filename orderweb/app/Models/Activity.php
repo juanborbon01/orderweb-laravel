@@ -22,9 +22,19 @@ class Activity extends Model
 
 
 
- public function activities()
+ public function technician()
  {
- return $this->hasway(Activity::class);
+ return $this->belongsTo(technician::class,'technician_id');
+ }
+
+ public function type_activity()
+ {
+    return $this->belongsTo(TypeActivity::class,'type_id');
+ }
+
+ public function orders()
+ {
+    return $this->belongsTo(Order::class,'order_activity','order_id','activity_id');
  }
 }
  

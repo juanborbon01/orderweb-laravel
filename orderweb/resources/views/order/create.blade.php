@@ -6,34 +6,56 @@
     @include('templates.messages')
     <div class="row"> 
         <div class="col-lg-12 mb-4">
-                <form action="#" method="POST">
+                <form action="{{ route('order.store') }}" method="POST">
                     @csrf
                         <div class="row form-group">
                             <div class="col-lg-4 mb-4">
-                                <label for="document">Documento</label>
+                                <label for="legalization_date">fechade legalizacion</label>
                                 <input type="number" class="form-control" 
-                                id="document" name="document" required>
+                                id="legalization_date" name="legalization_date" required>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-4">
-                            <label for="name">nombre</label>
+                            <label for="adreess">direcion</label>
                             <input type="text" class="form-control" 
-                            id="name" name="name" required>
+                            id="adreess" name="adreess" required>
                         </div>
                     </div>
                         <div class="row form-group">
                             <div class="col-lg-4 mb-4">
-                                <label for="technician_id">especialidad</label>
+                                <label for="city">Ciudad</label>
                                 <select class="form-control" 
-                                id="technician_id" name="technician_id" required>
-                                <option value="">seleccione</option>
+                                id="city" name="city" required>
+                                <option value="">seleccione</option
+                                @foreach ($cities as $city)>
+                                <option value="{{ $city['value'] }}">
+                                {{ $city['name'] }}
+                            </option>
+                            @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-4">
-                            <label for="telephone">telefono</label>
-                             <input type="number" class="form-control" id="telephone" name="telephone"required>                                
+                            <label for="especiality">Observaciones</label>
+                             <select name="especiality" id="especiality" class="form-control">
+                                <option value="">selecccione</option>  
+                                @foreach ($observations as $observation)
+                                <option value="{{ $observation['id'] }}">
+                                {{ $observation['description'] }}
+                            </option> 
+                            @endforeach
                                 </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <label for="causal_id">Causal</label>    
+                            <select name="causal_id" id="causal_id" class="form-control">
+                            <option value="">seleccione</option>
+                            @foreach ($causals as $causal)>
+                                <option value="{{ $causal['id'] }}">
+                                {{ $causal['name'] }}
+                            </option>
+                            @endforeach
+                            </select>                            
                         </div>
                         <div class="row form-group">
                             <label class="col-lg-6 mb-4">

@@ -6,33 +6,38 @@
     @include('templates.messages')
     <div class="row"> 
         <div class="col-lg-12 mb-4">
-                <form action="#" method="POST">
+                <form action="{{ route('technician.update', $technician['document']) }}" method="POST">
                     @csrf
+                    @method('PUT')
                         <div class="row form-group">
                             <div class="col-lg-6 mb-4">
                                 <label for="document">Documento</label>
                                 <input type="number" class="form-control" 
-                                id="document" name="document" required>
+                                id="document" name="document" required
+                                value="{{ $technician['document'] }}">
                             </div>
                         </div>
                         <div class="col-lg-6 mb-4">
                             <label for="name">nombre</label>
                             <input type="text" class="form-control" 
-                            id="name" name="name" required>
+                            id="name" name="name" required
+                            value="{{ $technician['name'] }}">
                         </div>
                     </div>
                         <div class="row form-group">
                             <div class="col-lg-6 mb-4">
                                 <label for="technician_id">especialidad</label>
                                 <select class="form-control" 
-                                id="technician_id" name="technician_id" required>
+                                id="technician_id" name="technician_id" required
+                                value="{{ $technician['especiality'] }}">
                                 <option value="">seleccione</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 mb-4">
                             <label for="telephone">telefono</label>
-                             <input type="number" class="form-control" id="telephone" name="telephone"required>                                
+                             <input type="number" class="form-control" id="telephone" name="telephone"required
+                             value="{{ $technician['phone'] }}">                                
                                 </div>
                         </div>
                         <div class="row form-group">

@@ -9,6 +9,8 @@ class Technician extends Model
 {
     use HasFactory;
     protected $table = 'technician';
+    public $incrementing = false ;
+    protected $prymarykey = 'document';
     protected $fillable = [
         'document',
         'name',
