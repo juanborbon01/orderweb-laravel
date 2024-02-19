@@ -4,12 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Technician;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
-
-use function Ramsey\Uuid\v1;
+use Illuminate\Support\Facades\Validator;
 
 class TechnicianController extends Controller
 {
+    private $rules = [
+        'document' => 'required|integer|max:99999999999999999999|min:1',
+        'name' => 'required|string|max:80|min:3',
+        'especiality' => 'string|max:50|min:3',
+        'phone' => 'string|max:30'
+    ];
+
+    private $traductionAttributes = array(
+        'document' => 'documento',
+        'name' => 'nombre',
+        'especiality' => 'especialidad',
+        'phone' => 'teléfono' 
+    );
+    
     /**
      * Display a listing of the resource.
      */
@@ -32,17 +44,24 @@ class TechnicianController extends Controller
      */
     public function store(Request $request)
     {
-        //dpcument no es autoinc, por tanto se consulta si ya existe un
-        //tecnico con ese document
-        $technician = Technician::where('document','=',$request->document)->first();
-        if($technician)
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAttributes);
+        if ($validator->fails())
         {
-            session()->flash('error', 'Ya existe un tecnico conn ese documento');
-            return redirect()->route('technician.create');
+            $errors = $validator->errors();
+            return redirect()->route('technician.create')->withInput()->withErrors($errors);
+        }        
+        
+        //document no es pk autoinc, por tanto se consulta si ya existe un técnico con ese document
+        $technician = Technician::where('document', '=', $request->document)->first();
+        if($technician) 
+        {
+            session()->flash('error', 'Ya existe un técnico con ese documento');
+            return redirect()->route('technician.create')->withInput();
         }
 
         $technician = Technician::create($request->all());
-        session()->flash('message', 'registro creado exitosamente');
+        session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('technician.index');
     }
 
@@ -58,15 +77,17 @@ class TechnicianController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        $technician = Technician::where('document','=',$id)->first();
-        if($technician)
+    {        
+        $technician = Technician::where('document', '=', $id)->first();
+        if($technician) 
         {
-            return view('technician.edit', compact($technician));
-            
+            return view('technician.edit', compact('technician'));
         }
-        session()->flash('warning', 'No se encuentra el registro solicitado');
+        else
+        {
+            session()->flash('warning', 'No se encuentra el registro solicitado');
             return redirect()->route('technician.index');
+        }   
     }
 
     /**
@@ -74,19 +95,28 @@ class TechnicianController extends Controller
      */
     public function update(Request $request, string $document)
     {
-        $technician = Technician::where('document','=',$document)->first();
-        if($technician)
+        $validator = Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAttributes);
+        if ($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('technician.edit', $document)->withInput()->withErrors($errors);
+        } 
+        
+        $technician = Technician::where('document', '=', $document)->first();       
+        if($technician) 
         {
             $technician->name = $request->name;
             $technician->especiality = $request->especiality;
             $technician->phone = $request->phone;
-            $technician->save();
-            session()->flash('message','Registro actulizado exitosamnete');
+            $technician->save();            
+            session()->flash('message', 'Registro actualizado exitosamente');
         }
         else
         {
-            session()->flash('warning','nose encuentra el registro solicitado');
+            session()->flash('warning', 'No se encuentra el registro solicitado');
         }
+        
         return redirect()->route('technician.index');
     }
 
@@ -95,18 +125,17 @@ class TechnicianController extends Controller
      */
     public function destroy(string $id)
     {
-        $technician = Technician::where('document','=',$id)->first();
-        if($technician)
+        $technician = Technician::where('document', '=', $id)->first();
+        if($technician) 
         {
             $technician->delete();
-            session()->flash('message','Registro eliminado exitosamnete');
+            session()->flash('message', 'Registro eliminado exitosamente');
         }
         else
         {
-            session()->flash('warning','nose encuentra el registro solicitado');
-        }
+            session()->flash('warning', 'No se encuentra el registro solicitado');            
+        } 
+
         return redirect()->route('technician.index');
     }
-
 }
-

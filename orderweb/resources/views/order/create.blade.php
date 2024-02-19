@@ -12,13 +12,13 @@
                             <div class="col-lg-4 mb-4">
                                 <label for="legalization_date">fechade legalizacion</label>
                                 <input type="number" class="form-control" 
-                                id="legalization_date" name="legalization_date" required>
+                                id="legalization_date" name="legalization_date" required value="{{ old('legalization_date') }}">
                             </div>
                         </div>
                         <div class="col-lg-4 mb-4">
                             <label for="adreess">direcion</label>
                             <input type="text" class="form-control" 
-                            id="adreess" name="adreess" required>
+                            id="adreess" name="adreess" required value= "{{ old('addreess') }}">
                         </div>
                     </div>
                         <div class="row form-group">

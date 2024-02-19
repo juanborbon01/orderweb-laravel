@@ -30,10 +30,11 @@
                             <option value="">seleccione</option>
                             @foreach ($technicians as $technician)
                                 <option value="{{ $technician['document'] }}"
-                                    @if($technician['document'] == $activity['technician_id']) selected @endif>
-                                    {{  $technician['name'] }}</option>
+                                    @if(old('technician_id')== $technician['document']) selected @endif>
+                                    {{  $technician['name'] }}
+                                </option>
+                                @endforeach
                             </select>
-                            @endforeach
                         </div>
                     <div class="row form-group">
                         <div class="col-lj-6 mb-4">
@@ -43,7 +44,7 @@
                             <option value="">seleccione</option>
                             @foreach ($types as $type)
                                 <option value="{{ $type['id'] }}"
-                                @if($type['id'] == $activity['type_id']) selected @endif>
+                                @if(old('type_id')== $type['id']) selected @endif>
                                 {{ $type['description'] }}
                             </option>
                             @endforeach

@@ -13,13 +13,15 @@
                             <div class="col-lg-6 mb-4">
                                 <label for="description">Descripcion</label>
                                 <input type="text" class="form-control" 
-                                id="description" name="description" required>
+                                id="description" name="description" required 
+                                value="{{ old('description') }}">
 
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <label for="hours">horas estimadas</label>
                                 <input type="number" class="form-control" 
-                                id="hours" name="hours" required>
+                                id="hours" name="hours" required
+                                value="{{ old('hours') }}">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -46,9 +48,7 @@
                                 @endforeach
                                 </select>
                             </div>
-    
                         </div>
-
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-6 mb-4">
@@ -57,19 +57,12 @@
                                     guardar
                                 </button>
                                 </div>
-
                     <div class="col-lg-6 mb-4">
                         <a href="{{ route('activity.index') }}" class="btn btn-secondary btn-block">
                             Cancelar
                                 </a>
                     </div>
-
-
-
                 </form>
-
         </div>
-
-    </div>
-    
+    </div>   
 @endsection

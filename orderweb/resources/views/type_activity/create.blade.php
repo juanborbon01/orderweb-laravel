@@ -13,7 +13,7 @@
                             <div class="col-lg-12 mb-4">
                                 <label for="description">Descripcion</label>
                                 <input type="text" class="form-control" 
-                                id="description" name="description" required>
+                                id="description" name="description" required value="{{ old('description') }}">
 
                             </div>
                         </div>
