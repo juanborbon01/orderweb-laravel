@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Activity;
 use App\Models\Technician;
 use App\Models\TypeActivity;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TestActivitySeeder extends Seeder
